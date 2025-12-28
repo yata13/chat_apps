@@ -1,0 +1,139 @@
+/* Full-page gradient background for signup, matching the new login look */
+.signup-shell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  /* gradient borrowed from the login page */
+  background: linear-gradient(135deg, #243B55, #141E30, #141E30, #141E30, #243B55);
+  font-family: "Segoe UI", sans-serif;
+  color: #fff;
+}
+
+/* Card container for the sign‑up form */
+.signup-card {
+  background: transparent;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  width: 70%;
+  max-width: 450px;
+}
+
+/* Logo at the top of the form */
+.signup-logo img {
+  width: 10rem;
+  height: 10rem;
+}
+
+/* Subtitle / tagline below the logo */
+.signup-subtitle {
+  font-size: 15px;
+  color: #a0a3aa;
+  text-align: center;
+}
+
+/* Two‑column grid for grouping inputs side by side */
+.signup-grid-2 {
+  width: 100%;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 1fr 1fr;
+}
+@media (min-width: 520px) {
+  .signup-grid-2 {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Generic input styling */
+.signup-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #3a3d42;
+  border-radius: 6rem;
+  background: #1b1c1f;
+  color: #fff;
+  font-size: 15px;
+}
+.signup-input:focus {
+  outline: none;
+  border-color: #3b82f6;
+}
+
+/* Gender selection row */
+.signup-gender {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  color: #a0a3aa;
+}
+.signup-gender label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Custom file input */
+.signup-file {
+  width: 100%;
+  border: 1px dashed #3a3d42;
+  border-radius: 6rem;
+  padding: 12px;
+  color: #a0a3aa;
+  cursor: pointer;
+  background: #1b1c1f;
+  font-size: 14px;
+  display: block;
+}
+.signup-file input[type="file"] {
+  display: none;
+}
+
+/* Primary button for submitting or proceeding */
+.signup-btn {
+  width: 50%;
+  padding: 12px;
+  background: linear-gradient(135deg, #2164d0, #243B55, #141E30);
+  color: #fff;
+  border: none;
+  border-radius: 6rem;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background 0.2s;
+}
+.signup-btn:hover {
+  background: linear-gradient(135deg, #2164d0, #314a67, #141E30);
+}
+
+/* Links under the form */
+.signup-links {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  font-size: 14px;
+  margin-top: 10px;
+}
+.signup-links a {
+  color: #3b82f6;
+  text-decoration: none;
+}
+
+.signup-links a:hover {
+  text-decoration: underline;
+}
+
+/* Error message styling */
+.signup-error {
+  color: tomato;
+  font-size: 14px;
+  text-align: center;
+  margin-top: 10px;
+}

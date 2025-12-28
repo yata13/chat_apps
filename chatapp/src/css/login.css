@@ -1,0 +1,122 @@
+/* Full-page background */
+.login-shell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #243B55,#141E30, #141E30, #141E30, #243B55);
+  font-family: "Segoe UI", sans-serif;
+  color: #fff;
+}
+
+
+/* Card container */
+.login-card {
+  background: transparent;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.3rem;
+  width: 70%;
+  max-width: 30rem;
+  height: 100%;
+}
+
+/* Logo */
+.login-logo img {
+  width: 15rem;
+  height: 15rem;
+}
+
+
+.login-subtitle {
+  font-size: 15px;
+  color: #a0a3aa;
+  text-align: center;
+}
+
+/* Inputs */
+.login-input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #3a3d42;
+  border-radius: 6rem;
+  background: #1b1c1f;
+  color: #fff;
+  font-size: 15px;
+}
+
+.login-input:focus {
+  outline: none;
+  border-color: #3b82f6;
+}
+
+/* Row (remember + forgot) */
+.login-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  font-size: 13px;
+}
+
+.login-remember {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #a0a3aa;
+}
+
+.login-forgot {
+  color: #a0a3aa;
+  text-decoration: none;
+}
+
+.login-forgot:hover {
+  text-decoration: underline;
+}
+
+/* Button */
+.login-btn {
+  width: 50%;
+  padding: 12px;
+  background: linear-gradient(135deg, #2164d0,  #243B55, #141E30);
+  color: #fff;
+  border: none;
+  border-radius: 6rem;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background 0.2s;
+}
+
+.login-btn:hover {
+  background: linear-gradient(135deg, #2164d0,  #314a67, #141E30);
+}
+
+/* Extra links (signup + social) */
+.login-links {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.login-links a {
+  color: #3b82f6;
+  text-decoration: none;
+}
+
+.login-links a:hover {
+  text-decoration: underline;
+}
+
+/* Error */
+.login-error {
+  color: tomato;
+  font-size: 14px;
+  text-align: center;
+}

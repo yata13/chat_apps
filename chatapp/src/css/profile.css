@@ -1,0 +1,65 @@
+
+.profile-contaner{
+    width: 100vw;
+    height: 100vh;
+    color: #ffffff;
+    padding: 2rem;
+}
+
+.profile-info-card{   
+    margin: 2rem; 
+    padding: 1rem;
+    border-radius: 1rem;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(15px);
+    background: rgba(255, 255, 255, 0.191);
+    box-shadow: 0 0 30px rgba(0, 0, 0, .2);
+}
+
+.profile-img{
+    width: 5rem;
+    height: 5rem;
+    border-radius: 5rem;
+}
+
+
+.profile-header-div{
+    grid-area: 1/2;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    padding: 0.5rem;
+}
+
+.profile-main-div{
+    grid-area: 2/3;
+    display: grid;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.profile-footer-div{
+    grid-area: 3/4;
+    display: grid;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.profile-delete-btn{
+    width: 10rem;
+    height: 2rem;
+    background-color: rgb(255, 4, 4);
+    color: white;
+    font-size: 1rem;
+    border: none;
+    border-radius: 2rem;
+}
+
+.profile-back-btn{
+    width: 25%;
+    height: 2.5rem;
+    font-size: 1.2rem;
+    background-color: rgb(53, 54, 55);
+    color: #ffffff;
+    border-radius: 5px;
+}
