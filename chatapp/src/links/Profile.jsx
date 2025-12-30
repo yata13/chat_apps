@@ -21,7 +21,7 @@ function Profile() {
         setU(null);
 
         if (!userId) {
-          const r = await fetch("${config.API_URL}/api/me", { credentials: "include", signal: ctrl.signal });
+          const r = await fetch(`${config.API_URL}/api/me`, { credentials: "include", signal: ctrl.signal });
           if (!r.ok) throw new Error(`Failed: ${r.status}`);
           const d = await r.json();
           if (alive) {
@@ -33,7 +33,7 @@ function Profile() {
 
         const [rUser, rMe] = await Promise.all([
           fetch(`${config.API_URL}/api/users/${userId}`, { credentials: "include", signal: ctrl.signal }),
-          fetch("${config.API_URL}/api/me", { credentials: "include", signal: ctrl.signal }),
+          fetch(`${config.API_URL}/api/me`, { credentials: "include", signal: ctrl.signal }),
         ]);
 
         if (!rUser.ok) throw new Error(`User ${userId} not found`);
@@ -60,7 +60,7 @@ function Profile() {
     if (!yes) return;
 
     try {
-      let r = await fetch("${config.API_URL}/api/me", {
+      let r = await fetch(`${config.API_URL}/api/me`, {
         method: "DELETE",
         credentials: "include",
       });

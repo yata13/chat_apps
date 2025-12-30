@@ -24,7 +24,7 @@ export default function PrivateChatDashbord() {
   useEffect(() => {
     (async () => {
       try {
-        const r = await fetch("${config.API_URL}/api/me", { credentials: "include" });
+        const r = await fetch(`${config.API_URL}/api/me`, { credentials: "include" });
         const d = r.ok ? await r.json() : {};
         setMeId(d?.user?.id ?? null);
       } catch { setMeId(null); }
@@ -36,7 +36,7 @@ export default function PrivateChatDashbord() {
     if (!conversationId) return;
     (async () => {
       try {
-        const r = await fetch("${config.API_URL}/api/conversations", { credentials: "include" });
+        const r = await fetch(`${config.API_URL}/api/conversations`, { credentials: "include" });
         if (!r.ok) return;
         const d = await r.json();
         const conv = (d.conversations || []).find(
@@ -74,7 +74,7 @@ export default function PrivateChatDashbord() {
 
   // 4) live updates (unchanged)
   useEffect(() => {
-    const s = io("${config.API_URL}", { withCredentials: true });
+    const s = io(`${config.API_URL}`, { withCredentials: true });
     socketRef.current = s;
 
     s.emit("join_conversation", { conversationId: Number(conversationId) });
@@ -109,7 +109,7 @@ export default function PrivateChatDashbord() {
     if (!body) return;
 
     try {
-      const response = await fetch("${config.API_URL}/api/messages", {
+      const response = await fetch(`${config.API_URL}/api/messages`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",

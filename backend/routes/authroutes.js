@@ -50,7 +50,7 @@ function signToken(payload) {
 function setAuthCookie(res, token) {
   res.cookie("token", token, {
     httpOnly: true,
-    sameSite: "lax",
+    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
     secure: process.env.NODE_ENV === "production",
     maxAge: ONE_HOUR * 1000,
     path: "/",
@@ -140,7 +140,7 @@ router.post("/login", async (req, res) => {
 router.post("/logout", (_req, res) => {
   res.clearCookie("token", {
     httpOnly: true,
-    sameSite: "lax",
+    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
     secure: process.env.NODE_ENV === "production",
     path: "/"
   });
