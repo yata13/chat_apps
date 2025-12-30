@@ -48,21 +48,27 @@ function signToken(payload) {
   return jwt.sign(payload, JWT_SECRET, { expiresIn: ONE_HOUR });
 }
 function setAuthCookie(res, token) {
+  const isProduction = process.env.NODE_ENV === "production" || process.env.RENDER === "true";
   res.cookie("token", token, {
     httpOnly: true,
-    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
-    secure: process.env.NODE_ENV === "production",
+    sameSite: isProduction ? "none" : "lax",
+    secure: isProduction, // Cross-domain cookies must be secure
     maxAge: ONE_HOUR * 1000,
     path: "/",
   });
+  console.log(`Set-Cookie called. Environment: ${isProduction ? 'Production (Secure/None)' : 'Dev (Lax)'}`);
 }
 export function requireAuth(req, res, next) {
   const token = req.cookies?.token;
-  if (!token) return res.status(401).json({ ok: false, error: "Unauthenticated" });
+  if (!token) {
+    console.warn(`Auth failed: No token cookie found for ${req.url}. Headers:`, req.headers.cookie ? 'Present (different name?)' : 'Missing entirely');
+    return res.status(401).json({ ok: false, error: "Unauthenticated" });
+  }
   try {
     req.user = jwt.verify(token, JWT_SECRET);
     next();
-  } catch {
+  } catch (err) {
+    console.warn(`Auth failed: Invalid/Expired token for ${req.url}`);
     return res.status(401).json({ ok: false, error: "Invalid/expired token" });
   }
 }

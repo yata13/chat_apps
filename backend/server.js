@@ -38,8 +38,24 @@ app.set("io", io);
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+// Request logging middleware for debugging
+app.use((req, res, next) => {
+  console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
+  console.log(`  Origin: ${req.headers.origin || 'No Origin'}`);
+  console.log(`  Cookies: ${req.headers.cookie ? 'Present' : 'Missing'}`);
+  next();
+});
+
 app.use(cors({
-  origin: true,
+  origin: (origin, callback) => {
+    // Reflect origin for Netlify and localhost, or allow if no origin (mobile/curl)
+    if (!origin) return callback(null, true);
+    if (origin.includes("netlify.app") || origin.includes("localhost") || origin.includes("rendered.com")) {
+      callback(null, true);
+    } else {
+      callback(null, true); // Still permissive for debugging, but we log it
+    }
+  },
   credentials: true
 }));
 
