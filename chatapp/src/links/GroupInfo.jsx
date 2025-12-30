@@ -29,7 +29,7 @@ export default function GroupInfo() {
   useEffect(() => {
     if (!q.trim()) { setSearchUsers([]); return; }
     (async () => {
-      const r = await fetch("${config.API_URL}/api/users", { credentials: "include" });
+      const r = await fetch(`${config.API_URL}/api/users`, { credentials: "include" });
       const d = await r.json();
       const norm = (s = "") => s.toLowerCase();
       const filtered = (d.users || []).filter(u => {
@@ -42,13 +42,12 @@ export default function GroupInfo() {
 
   async function addMember(userId) {
     const r = await fetch(`${config.API_URL}/api/groups/${conversationId}/members`, {
-      const r = await fetch(`${config.API_URL}/api/groups/${conversationId}/members`, {
-        method: "POST", credentials: "include",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ memberIds: [userId] })
-      });
-      const d = await r.json();
-      if(!d.ok) return setErr(d.error || "Failed to add");
+      method: "POST", credentials: "include",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ memberIds: [userId] })
+    });
+    const d = await r.json();
+    if (!d.ok) return setErr(d.error || "Failed to add");
     const r2 = await fetch(`${config.API_URL}/api/groups/${conversationId}`, { credentials: "include" });
     const d2 = await r2.json();
     setMembers(d2.members || []);
