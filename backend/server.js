@@ -146,8 +146,12 @@ const PORT = process.env.PORT || 5000;
 const HOST = process.env.HOST || '0.0.0.0';
 
 server.listen(PORT, HOST, () => {
+  const isProduction = process.env.NODE_ENV === "production" || 
+                       process.env.RENDER === "true" || 
+                       process.env.RENDER_EXTERNAL_URL;
   console.log(`🚀 Server running on ${HOST}:${PORT}`);
   console.log(`📡 Environment: ${process.env.NODE_ENV || 'development'}`);
+  console.log(`🔐 Production mode (secure cookies): ${isProduction}`);
   console.log(`🔧 CLIENT_URL env var: ${process.env.CLIENT_URL || 'NOT SET'}`);
   console.log(`🌐 Allowed origins: ${allowedOrigins.join(', ')}`);
 });

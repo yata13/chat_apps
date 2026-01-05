@@ -48,15 +48,21 @@ function signToken(payload) {
   return jwt.sign(payload, JWT_SECRET, { expiresIn: ONE_HOUR });
 }
 function setAuthCookie(res, token) {
-  const isProduction = process.env.NODE_ENV === "production" || process.env.RENDER === "true";
-  res.cookie("token", token, {
+  // Check multiple indicators for production environment
+  const isProduction = process.env.NODE_ENV === "production" || 
+                       process.env.RENDER === "true" || 
+                       process.env.RENDER_EXTERNAL_URL;
+  
+  const cookieOptions = {
     httpOnly: true,
     sameSite: isProduction ? "none" : "lax",
-    secure: isProduction, // Cross-domain cookies must be secure
+    secure: isProduction, // Cross-domain cookies MUST be secure with SameSite=None
     maxAge: ONE_HOUR * 1000,
     path: "/",
-  });
-  console.log(`Set-Cookie called. Environment: ${isProduction ? 'Production (Secure/None)' : 'Dev (Lax)'}`);
+  };
+  
+  res.cookie("token", token, cookieOptions);
+  console.log(`Set-Cookie called. Production mode: ${isProduction}. Options:`, cookieOptions);
 }
 export function requireAuth(req, res, next) {
   const token = req.cookies?.token;
@@ -144,10 +150,13 @@ router.post("/login", async (req, res) => {
 
 // LOGOUT
 router.post("/logout", (_req, res) => {
+  const isProduction = process.env.NODE_ENV === "production" || 
+                       process.env.RENDER === "true" || 
+                       process.env.RENDER_EXTERNAL_URL;
   res.clearCookie("token", {
     httpOnly: true,
-    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
-    secure: process.env.NODE_ENV === "production",
+    sameSite: isProduction ? "none" : "lax",
+    secure: isProduction,
     path: "/"
   });
   res.json({ ok: true });
