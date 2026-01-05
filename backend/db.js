@@ -1,6 +1,10 @@
 import pg from "pg";
+import dns from "dns";
 import dotenv from "dotenv";
 dotenv.config();
+
+// Force IPv4 to fix Render + Supabase connection issues
+dns.setDefaultResultOrder('ipv4first');
 
 console.log("🔌 Initializing database connection...");
 console.log(`   DATABASE_URL: ${process.env.DATABASE_URL ? 'SET (hidden)' : 'NOT SET'}`);
@@ -8,15 +12,12 @@ console.log(`   DB_SSL: ${process.env.DB_SSL}`);
 console.log(`   NODE_ENV: ${process.env.NODE_ENV}`);
 
 const pool = new pg.Pool({
-  // Allow using a single connection string (common for Supabase/Render)
   connectionString: process.env.DATABASE_URL,
-  // Fallback to individual params if no connection string
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
   port: process.env.DB_PORT || 5432,
-  // SSL is often required for cloud Postgres
   ssl: process.env.DB_SSL === 'true' || (process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false)
 });
 
