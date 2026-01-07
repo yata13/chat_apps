@@ -13,12 +13,9 @@ console.log(`   NODE_ENV: ${process.env.NODE_ENV}`);
 
 const pool = new pg.Pool({
   connectionString: process.env.DATABASE_URL,
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
-  port: process.env.DB_PORT || 5432,
-  ssl: process.env.DB_SSL === 'true' || (process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false)
+  ssl: {
+    rejectUnauthorized: false
+  }
 });
 
 // Test connection on startup
