@@ -1,0 +1,26 @@
+# Backend Environment Variables for Render
+# Add these in Render Dashboard → Your Service → Environment
+
+# Database (Supabase PostgreSQL)
+DATABASE_URL=postgresql://postgres:[YOUR-PASSWORD]@db.[PROJECT-REF].supabase.co:5432/postgres
+DB_SSL=true
+
+# Supabase (for file uploads/storage)
+SUPABASE_URL=https://[PROJECT-REF].supabase.co
+SUPABASE_SERVICE_KEY=[YOUR-SERVICE-ROLE-KEY]
+
+# Authentication
+JWT_SECRET=your-super-secret-jwt-key-change-this-in-production
+
+# Server Configuration
+CLIENT_URL=https://your-frontend-name.netlify.app
+NODE_ENV=production
+PORT=10000
+
+# Instructions:
+# 1. DATABASE_URL: Replace [YOUR-PASSWORD] and [PROJECT-REF] with your Supabase values
+# 2. SUPABASE_URL: Get from Supabase Dashboard → Settings → API → Project URL
+# 3. SUPABASE_SERVICE_KEY: Get from Supabase Dashboard → Settings → API → service_role key (secret)
+# 4. JWT_SECRET: Generate a strong random string (use: openssl rand -base64 32)
+# 5. CLIENT_URL: Update after deploying frontend to Netlify
+
